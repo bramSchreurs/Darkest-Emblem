@@ -1,0 +1,10 @@
+startpunt heeft edges
+elke edge heeft een weight
+store elke edge die reachable is in een array (store die ook allemaal in een result array)
+wandel naar de meest dichtbije edge
+check alle nieuwe edges en steek die dat reachable zijn bij in de array
+repeat tot er geen edges zijn om naartoe te wandelen (eventueel check bij het wandelen naar een edge of ge er al geweest zijt voor een lagere kost?)
+
+
+theorie: 
+neem de og map 2d array na initialisatie en maak er dan een soort mapping van

@@ -7,6 +7,8 @@ TagManager:
   - DangerousTile
   - LargeTile
   - LevelChanger
+  - Tile
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - 
   - NotPathable
   - Player
-  - 
+  - Tilebois
   - 
   - 
   - 

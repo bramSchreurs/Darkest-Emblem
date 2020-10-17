@@ -5,6 +5,8 @@ using UnityEngine;
 public class FullMap : MonoBehaviour
 {
     public MapTile[] mapTileArray;
+    public MapTile[,] mapInMapTiles;
+    public GameObject[,] instantiatedTiles;
     int[,] tiles;
     int mapSizeX = 10;
     int mapSizeY = 10;
@@ -12,11 +14,15 @@ public class FullMap : MonoBehaviour
     private void Start()
     {
         tiles = new int[mapSizeX, mapSizeY];
+        mapInMapTiles = new MapTile[mapSizeX,mapSizeY];
+        instantiatedTiles = new GameObject[mapSizeX, mapSizeY];
+        Debug.Log("instantiatedtiles instantiated");
         //grass = 0
         for(int x=0; x< mapSizeX; x++)
         {
             for(int y=0; y< mapSizeY; y++)
             {
+                //Debug.Log("so this happening?");
                 tiles[x, y] = 0;
             }
         }
@@ -68,8 +74,12 @@ public class FullMap : MonoBehaviour
             for (int y = 0; y < mapSizeY; y++)
             {
                 MapTile tile = mapTileArray[tiles[x, y]];
-                Instantiate(tile.gameObject, new Vector3(x, y, 0), Quaternion.identity);
+                mapInMapTiles[x,y] = tile;
+                instantiatedTiles[x,y] = Instantiate(tile.gameObject, new Vector3(x, y, 0), Quaternion.identity);
             }
         }
+        EventBroker.CallMapInstantiated();
+        Debug.Log("made map:");
+        Debug.Log(instantiatedTiles);
     }
 }
