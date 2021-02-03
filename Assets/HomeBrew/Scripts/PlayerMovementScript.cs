@@ -104,9 +104,9 @@ public class PlayerMovementScript : TacticsMovement
                         }
                     }
                 }
-            Debug.Log("clicked");
+            //Debug.Log("clicked");
             canClick = false;
-            Debug.Log("canClick now false");
+            //Debug.Log("canClick now false");
             }
         }
         

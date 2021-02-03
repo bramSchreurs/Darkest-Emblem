@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -65,7 +65,6 @@ public class TacticsMovement : MonoBehaviour
     {
         ComputeAdjencencyLists();
         GetCurrentTile();
-
         Queue<MapTile> process = new Queue<MapTile>();
         process.Enqueue(currentTile);
         currentTile.visited = true;

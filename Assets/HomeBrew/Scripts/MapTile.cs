@@ -38,13 +38,13 @@ public class MapTile: MonoBehaviour
             //Debug.Log("target?");
             GetComponent<Renderer>().material.color = Color.green;
         }
-        else if(selectable) {
-            //Debug.Log("selectable?");
-            GetComponent<Renderer>().material.color = Color.red;
-        }
         else if(occupied) {
             //Debug.Log("selectable?");
             GetComponent<Renderer>().material.color = Color.blue;
+        }
+        else if(selectable) {
+            //Debug.Log("selectable?");
+            GetComponent<Renderer>().material.color = Color.red;
         }
         else {
             //Debug.Log("else?");
@@ -52,12 +52,24 @@ public class MapTile: MonoBehaviour
         }
     }
     public void reset(){
+        Debug.Log("reset");
         visited = false;
         parent = null;
         distance = 0;
 
         current = false;
         selectable = false;
+        target = false;
+
+        occupied = false;
+    }
+    public void resetWithoutSelectable(){
+        Debug.Log("reset without selectable");
+        visited = false;
+        parent = null;
+        distance = 0;
+
+        current = false;
         target = false;
 
         occupied = false;
@@ -100,12 +112,24 @@ public class MapTile: MonoBehaviour
                     
                 }
                 */
-                RaycastHit2D raycast = Physics2D.Raycast(tile.transform.position, Vector3.forward, 0.25F, ~LayerMask.GetMask("Tilebois"), -Mathf.Infinity, Mathf.Infinity);
+
+                //deze raycasthit collision werkt niet helemaal juist, dat zou moeten detecten of er iets op staat
+                RaycastHit2D raycast = Physics2D.Raycast(tile.transform.position, Vector3.forward, -10F, ~LayerMask.GetMask("Tilebois"), -Mathf.Infinity, Mathf.Infinity);
+                //Debug.Log("tile.transform.position");
+                //Debug.Log(tile.transform.position);
+                //Debug.Log(Vector3.forward * -10F);
                 if (!raycast)
                 {
                     adjacencyList.Add(tile);
                 }
                 else{
+                    Debug.Log((tile.transform.position, Vector2.right, Mathf.Infinity, LayerMask.GetMask("Tilebois")));
+                    Debug.Log(tile);
+                    Debug.Log(tile.occupied);
+                    Debug.Log(tile.transform.position);
+                    tile.occupied = true;
+                    tile.selectable = false;
+                    Debug.Log(tile.occupied);
                     //raycast.collider.gameObject.GetComponent<MapTile>().occupied = true;
                 }
             }

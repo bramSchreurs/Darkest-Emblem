@@ -9,16 +9,19 @@ public class TurnManager : MonoBehaviour
     static Queue<string> turnKey = new Queue<string>();
     //team whose turn it currently is
     static Queue<TacticsMovement> turnTeam = new Queue<TacticsMovement>();
+    static GameObject[] tiles;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        tiles = GameObject.FindGameObjectsWithTag("Tile");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(turnTeam.Count);
+        //Debug.Log(turnTeam.Count);
         //basically only used at the start, might replace with sub-pub pattern
         if (turnTeam.Count == 0)
         {
@@ -27,7 +30,7 @@ public class TurnManager : MonoBehaviour
         
     }
     static void InitTeamTurnQueue(){
-        Debug.Log("initTeamTurnQueue");
+        //Debug.Log("initTeamTurnQueue");
         List<TacticsMovement> teamList = units[turnKey.Peek()];
         foreach (TacticsMovement unit in teamList)
         {
@@ -44,6 +47,10 @@ public class TurnManager : MonoBehaviour
         }
     }
     public static void EndTurn(){
+        foreach (GameObject tile in tiles)
+        {
+            tile.GetComponent<MapTile>().resetWithoutSelectable();
+        }
         Debug.Log("end turn");
         TacticsMovement unit = turnTeam.Dequeue();
         unit.EndTurn();
